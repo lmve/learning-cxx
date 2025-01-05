@@ -5,6 +5,21 @@ bool is_fibonacci(int *ptr, int len, int stride) {
     ASSERT(len >= 3, "`len` should be at least 3");
     // TODO: 编写代码判断从 ptr 开始，每 stride 个元素取 1 个元素，组成长度为 n 的数列是否满足
     // arr[i + 2] = arr[i] + arr[i + 1]
+    // 计算可以取的斐波那契数列的长度
+    int n = (len - 2 * stride) / stride + 1;
+
+    // 检查斐波那契数列的性质
+    for (int i = 0; i < n - 2; ++i) {
+        int index1 = i * stride;
+        int index2 = (i + 1) * stride;
+        int index3 = (i + 2) * stride;
+
+        // 检查是否满足 arr[i + 2] = arr[i] + arr[i + 1]
+        if (ptr[index3] != ptr[index1] + ptr[index2]) {
+            return false;
+        }
+    }
+    
     return true;
 }
 
